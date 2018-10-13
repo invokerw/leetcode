@@ -19,14 +19,18 @@
      请注意，答案必须是一个子串，"pwke" 是一个子序列 而不是子串。
 */
 
+// 滑动窗口思路解决问题
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-    	int max_size = 0;
-    	for (int i = 0; i < s.length(); ++i)
-    	{
-    		
-    	}
-    	return max_size; 
-    }
+	int lengthOfLongestSubstring(string s) {
+		int max_size = 0;
+		int index[128] = { 0 };
+		for (int i = 0, j = 0; j < s.length(); ++j)
+		{
+			if (index[(int)s[j]] > i) i = index[(int)s[j]];
+			if (j - i + 1 > max_size) max_size = j - i + 1;
+			index[(int)s[j]] = j + 1;
+		}
+		return max_size;
+	}
 };
